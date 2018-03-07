@@ -88,16 +88,18 @@ class Watcher
 
     public function send()
     {
-        DB::rollBack();
+        if ($this->config['enabled']) {
+            DB::rollBack();
 
-        try {
-            $this->guzzle->post($this->config['watch_url'], [
-                'headers' => $this->getHeaders(),
-                'form_params' => [
-                    'watcher' => $this->getBody(),
-                ],
-            ]);
-        } catch (\Exception $e) {
+            try {
+                $this->guzzle->post($this->config['watch_url'], [
+                    'headers' => $this->getHeaders(),
+                    'form_params' => [
+                        'watcher' => $this->getBody(),
+                    ],
+                ]);
+            } catch (\Exception $e) {
+            }
         }
     }
 }

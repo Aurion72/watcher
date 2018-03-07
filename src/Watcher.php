@@ -87,8 +87,9 @@ class Watcher
         ];
     }
 
-    public function send()
+    public function send($exception = false)
     {
+        if($exception instanceof \Exception) $this->exception = $exception;
         
         if ($this->config['enabled'] && !$this->exception instanceof NotFoundHttpException) {
             DB::rollBack();

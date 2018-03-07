@@ -5,6 +5,7 @@ namespace Aurion72\Watcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Watcher
 {
@@ -88,7 +89,8 @@ class Watcher
 
     public function send()
     {
-        if ($this->config['enabled']) {
+        
+        if ($this->config['enabled'] && !$this->exception instanceof NotFoundHttpException) {
             DB::rollBack();
 
             try {

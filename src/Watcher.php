@@ -91,7 +91,7 @@ class Watcher
     {
         if($exception instanceof \Exception) $this->exception = $exception;
         
-        if ($this->config['enabled'] && !$this->exception instanceof NotFoundHttpException) {
+        if ($this->config['enabled'] && !$this->exception instanceof NotFoundHttpException && $exception->getCode() != 429) {
             DB::rollBack();
 
             try {

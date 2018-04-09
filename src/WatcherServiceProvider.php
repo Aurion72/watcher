@@ -22,6 +22,7 @@ class WatcherServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->mergeConfigFrom(self::CONFIG_PATH, 'aurion72_watcher');
 
+
         $this->app->bind('watcher', function ($app) {
             try {
                 return new Watcher($app->make('request'), (new Client()));

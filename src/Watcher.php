@@ -91,7 +91,7 @@ class Watcher
     { 
         if($exception instanceof \Exception) $this->exception = $exception;
         
-        $status = $this->exception->status;
+        $status = $this->exception->status ?? null;
 
         if ($this->exception && $this->config['enabled'] && !in_array($status,$this->config['ignored_statuses']) && !in_array(get_class($this->exception),$this->config['ignored_exceptions'])) {
 
